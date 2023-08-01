@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Pets for Owner {{ owner_id }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5"></div>
+    <h1>Add Pets for Owner {{ owner_id }}</h1>
+    <form action="/add_pets/{{ owner_id }}" method="post" id="pets-form">
+        <div class="form-group">
+        <label for="pet_name">Pet Name:</label>
+        <input type="text"  class="form-control" name="pet_name" required>
+        </div>
+
+        <div class="form-group">
+        <label for="breed">Breed</label>
+        <input type="text"  class="form-control" name="breed" required>
+        </div>
+
+        <div class="form-group">
+        <label for="age">Age</label>
+        <input type="number"  class="form-control" name="age" required>
+        </div>
+
+        <div class="form-group">
+        <label for="problem">Problem</label>
+        <input type="text"  class="form-control" name="problem" required>
+        </div>
+
+        <div id="more-pets"></div>
+        <button type="button"  class="btn btn-primary" onclick="addMorePets()">Add More Pets</button><br>
+
+        <button type="submit">Save</button>
+    </form>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        let petCount = 1;
+
+        function addMorePets() {
+            const petsContainer = document.getElementById('more-pets');
+            const petTemplate = `
+            <div class="form-group">
+                <label for="name">Pet Name:</label>
+                <input type="text"  class="form-control" name="pet_name[]" required>
+                </div>
+
+            <div class="form-group">
+                <label for="breed">Breed:</label>
+                <input type="text"  class="form-control" name="breed[]" required>
+                </div>
+
+
+            <div class="form-group">
+                <label for="age">age:</label>
+                <input type="number"  class="form-control" name="age[]" required>
+                </div>
+
+            <div class="form-group">
+                <label for="problem">Problem:</label>
+                <input type="text"  class="form-control" name="problem[]" required>
+                </div>
+            `;
+            const newPetDiv = document.createElement('div');
+            newPetDiv.innerHTML = petTemplate;
+            petsContainer.appendChild(newPetDiv);
+            petCount++;
+        }
+    </script>
+</body>
+</html>
